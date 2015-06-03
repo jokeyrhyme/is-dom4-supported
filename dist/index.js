@@ -82,6 +82,22 @@ var nodes = function (el) {
 };
 
 /**
+ * http://www.w3.org/TR/dom/#interface-element
+ * @param {Element} [el] a DOM Element to run tests against
+ * @returns {Boolean} are Elements supported?
+ */
+var elements = function (el) {
+  return !!(
+    typeof el.tagName === 'string' &&
+    typeof el.className === 'string' &&
+    typeof el.classList === 'object' &&
+    typeof el.matches === 'function' &&
+    typeof el.getAttribute === 'function' &&
+    typeof el.setAttribute === 'function'
+  );
+};
+
+/**
  * @param {Element} [el] a DOM Element to run tests against
  * @returns {Boolean} does this JavaScript environment conform to DOM 4?
  */
@@ -97,7 +113,8 @@ module.exports = function (el) {
     customEvents &&
     eventTargets(el) &&
     documents(el) &&
-    nodes(el)
+    nodes(el) &&
+    elements(el)
   );
 };
 
