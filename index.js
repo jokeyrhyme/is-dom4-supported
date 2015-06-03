@@ -70,6 +70,10 @@ var nodes = function (el) {
     // ChildNode
     typeof el.remove === 'function' &&
     // Node
+    global.Node &&
+    typeof global.Node.ELEMENT_NODE === 'number' &&
+    typeof global.Node.DOCUMENT_FRAGMENT_NODE === 'number' &&
+    typeof el.nodeType === 'number' &&
     typeof el.hasChildNodes === 'function' &&
     typeof el.insertBefore === 'function' &&
     typeof el.appendChild === 'function' &&
@@ -86,11 +90,15 @@ var nodes = function (el) {
  */
 var elements = function (el) {
   return !!(
+    global.HTMLElement &&
+    typeof el.localName === 'string' &&
     typeof el.tagName === 'string' &&
     typeof el.className === 'string' &&
     typeof el.classList === 'object' &&
     typeof el.matches === 'function' &&
     typeof el.getAttribute === 'function' &&
+    typeof el.hasAttribute === 'function' &&
+    typeof el.removeAttribute === 'function' &&
     typeof el.setAttribute === 'function'
   );
 };
