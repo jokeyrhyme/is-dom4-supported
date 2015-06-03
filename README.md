@@ -9,22 +9,23 @@ I wanted my web apps to be able to detect support for [Polymer](https://www.poly
 and the [WebComponents poly-fills](http://webcomponents.org/polyfills/).
 
 Combined with an [ECMAScript 5 feature-detect](https://github.com/jokeyrhyme/is-es5-supported), this project
-ought to be answer the following questions:
+ought to answer the following questions:
 
 - does the environment support Polymer and WebComponents.js (lite)?
-- do I need to activate a non-Polymer fallback?
+- do I need to continue with a non-Polymer fallback?
 
 I've checked and confirmed that this project tests all the parts of DOM 4 that
-WebComponents.js (lite) depends upon (plus a some other things I'm interested in).
+WebComponents.js (lite) depends upon (plus some other things I'm interested in).
 
 
 ## Supported Environments
 
 I've manually tested in a range of environments:
 
-- `true`: Chrome (43), (Mobile) Safari (8), Firefox (38), ??
+- `true`: Chrome (43), (Mobile) Safari (8), Firefox (38), Internet Explorer
+  (10, 11), Edge
 
-- `false`: ??
+- `false`: Internet Explorer (6, 7, 8, 9)
 
 
 ## Usage
@@ -44,3 +45,15 @@ console.log(isDOM4Supported()); // `true` or `false`
 console.log(isDOM4Supported()); // `true` or `false`
 </script>
 ```
+
+
+## API
+
+### `isDOM4Supported(el)`
+
+- @param {`Element`} [el] a DOM Element to run tests against
+- @returns {`Boolean`} does this JavaScript environment conform to DOM 4?
+
+This project creates a temporary unattached DOM Element if you do not provide
+one. If you are performing other tests against DOM Elements, you might consider
+reusing the same one, hence the optional parameter.
