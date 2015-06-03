@@ -1,0 +1,29 @@
+{
+  "name": "is-dom4-supported",
+  "version": "1.0.0",
+  "description": "does this JavaScript environment conform to DOM 4?",
+  "repository": "https://github.com/jokeyrhyme/is-dom4-supported.git",
+  "main": "index.js",
+  "scripts": {
+    "build": "browserify -e ./index.js -s isDOM4Supported > dist/index.js",
+    "pretest": "npm run build",
+    "test": "eslint . && istanbul cover ./tests/"
+  },
+  "keywords": [
+    "detect",
+    "es5"
+  ],
+  "author": "Ron Waldon (https://github.com/jokeyrhyme)",
+  "license": "BSD-2-Clause",
+  "devDependencies": {
+    "browserify": "^10.2.3",
+    "eslint": "^0.22.1",
+    "istanbul": "^0.3.14",
+    "tape": "^4.0.0"
+  },
+  "files": [
+    "dist/index.js",
+    "index.js",
+    "README.md"
+  ]
+}
