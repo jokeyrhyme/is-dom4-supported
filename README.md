@@ -2,6 +2,8 @@
 
 does this JavaScript environment conform to DOM 4?
 
+[![npm module](https://img.shields.io/npm/v/is-dom4-supported.svg)](https://www.npmjs.com/package/is-dom4-supported)
+
 
 ## What is this?
 
