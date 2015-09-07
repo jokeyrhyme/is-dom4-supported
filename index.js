@@ -4,6 +4,7 @@
 
 import { addSummary, assign } from './lib/helpers';
 import dom1 from './lib/dom1';
+import dom2 from './lib/dom2';
 
 // this module
 
@@ -50,7 +51,6 @@ var eventTargets = function (el) {
 var documents = function (el) {
   var doc = el.ownerDocument || global.document;
   return !!(
-    typeof doc.importNode === 'function' &&
     typeof doc.adoptNode === 'function' &&
     typeof doc.createEvent === 'function' &&
     typeof doc.createRange === 'function' &&
@@ -87,7 +87,6 @@ var nodes = function (el) {
 var elements = function (el) {
   return !!(
     global.HTMLElement &&
-    typeof el.localName === 'string' &&
     typeof el.className === 'string' &&
     typeof el.classList === 'object' &&
     (
@@ -122,6 +121,7 @@ module.exports = function (el = null, { returnObject = false } = {}) {
   };
 
   assign(report, dom1(el, { returnObject }));
+  assign(report, dom2(el, { returnObject }));
   addSummary(report, 'dom4');
 
   return returnObject ? report : report.dom4;

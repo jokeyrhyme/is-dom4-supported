@@ -66,6 +66,10 @@ return /******/ (function(modules) { // webpackBootstrap
 
 	var _libDom12 = _interopRequireDefault(_libDom1);
 
+	var _libDom2 = __webpack_require__(3);
+
+	var _libDom22 = _interopRequireDefault(_libDom2);
+
 	// this module
 
 	/**
@@ -101,7 +105,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	 */
 	var documents = function documents(el) {
 	  var doc = el.ownerDocument || global.document;
-	  return !!(typeof doc.importNode === 'function' && typeof doc.adoptNode === 'function' && typeof doc.createEvent === 'function' && typeof doc.createRange === 'function' && typeof doc.createNodeIterator === 'function' && typeof doc.createTreeWalker === 'function');
+	  return !!(typeof doc.adoptNode === 'function' && typeof doc.createEvent === 'function' && typeof doc.createRange === 'function' && typeof doc.createNodeIterator === 'function' && typeof doc.createTreeWalker === 'function');
 	};
 
 	/**
@@ -126,14 +130,14 @@ return /******/ (function(modules) { // webpackBootstrap
 	 * @returns {Boolean} are Elements supported?
 	 */
 	var elements = function elements(el) {
-	  return !!(global.HTMLElement && typeof el.localName === 'string' && typeof el.className === 'string' && typeof el.classList === 'object' && (typeof el.matches === 'function' || typeof el.matchesSelector === 'function' || typeof el.webkitMatchesSelector === 'function' || typeof el.mozMatchesSelector === 'function' || typeof el.msMatchesSelector === 'function') // IE (10, 11), Edge
+	  return !!(global.HTMLElement && typeof el.className === 'string' && typeof el.classList === 'object' && (typeof el.matches === 'function' || typeof el.matchesSelector === 'function' || typeof el.webkitMatchesSelector === 'function' || typeof el.mozMatchesSelector === 'function' || typeof el.msMatchesSelector === 'function') // IE (10, 11), Edge
 	  );
 	};
 
 	/**
 	 * @param {Element} [el] a DOM Element to run tests against
 	 * @param {Object} [options]
-	 * @returns {Boolean} does this JavaScript environment conform to DOM 4?
+	 * @returns {boolean|Object} true|false unless returnObject is true
 	 */
 	module.exports = function () {
 	  var el = arguments.length <= 0 || arguments[0] === undefined ? null : arguments[0];
@@ -159,6 +163,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	  };
 
 	  (0, _libHelpers.assign)(report, (0, _libDom12['default'])(el, { returnObject: returnObject }));
+	  (0, _libHelpers.assign)(report, (0, _libDom22['default'])(el, { returnObject: returnObject }));
 	  (0, _libHelpers.addSummary)(report, 'dom4');
 
 	  return returnObject ? report : report.dom4;
@@ -169,7 +174,7 @@ return /******/ (function(modules) { // webpackBootstrap
 /* 1 */
 /***/ function(module, exports) {
 
-	/* WEBPACK VAR INJECTION */(function(global) {'use strict';
+	'use strict';
 
 	Object.defineProperty(exports, '__esModule', {
 	  value: true
@@ -194,14 +199,12 @@ return /******/ (function(modules) { // webpackBootstrap
 	  for (var prop in propTypes) {
 	    if (propTypes.hasOwnProperty(prop)) {
 	      if (typeof obj[prop] === 'undefined') {
-	        global.console.log(prop, 'undefined');
 	        return false;
 	      }
 	      if (propTypes[prop] === null) {
 	        break; // special case that is satisfied by any type
 	      }
 	      if (typeof obj[prop] !== propTypes[prop]) {
-	        global.console.log(prop, obj[prop] + ' !== ' + propTypes[prop]);
 	        return false;
 	      }
 	    }
@@ -240,7 +243,6 @@ return /******/ (function(modules) { // webpackBootstrap
 	  }
 	  return to;
 	}
-	/* WEBPACK VAR INJECTION */}.call(exports, (function() { return this; }())))
 
 /***/ },
 /* 2 */
@@ -282,6 +284,10 @@ return /******/ (function(modules) { // webpackBootstrap
 	    createAttribute: 'function',
 	    createEntityReference: 'function',
 	    getElementsByTagName: 'function'
+	  });
+
+	  var dom1DocumentImplementation = (0, _helpers.assertPropertyTypes)(doc.implementation, {
+	    hasFeature: 'function'
 	  });
 
 	  var dom1Node = (0, _helpers.assertPropertyTypes)(el, {
@@ -337,6 +343,7 @@ return /******/ (function(modules) { // webpackBootstrap
 
 	  var report = {
 	    'dom1.document': dom1Document,
+	    'dom1.documentimplementation': dom1DocumentImplementation,
 	    'dom1.element': dom1Element,
 	    'dom1.node': dom1Node,
 	    'dom1.nodetype': dom1NodeType
@@ -345,6 +352,81 @@ return /******/ (function(modules) { // webpackBootstrap
 	  (0, _helpers.addSummary)(report, 'dom1');
 
 	  return returnObject ? report : report.dom1;
+	};
+
+	module.exports = exports['default'];
+	/* WEBPACK VAR INJECTION */}.call(exports, (function() { return this; }())))
+
+/***/ },
+/* 3 */
+/***/ function(module, exports, __webpack_require__) {
+
+	/* WEBPACK VAR INJECTION */(function(global) {'use strict';
+
+	// local modules
+
+	Object.defineProperty(exports, '__esModule', {
+	  value: true
+	});
+
+	var _helpers = __webpack_require__(1);
+
+	// this module
+
+	// http://www.w3.org/TR/REC-DOM-Level-1/level-one-core.html
+
+	exports['default'] = function (el, _ref) {
+	  var returnObject = _ref.returnObject;
+
+	  var doc = el.ownerDocument || global.document;
+	  if (!doc) {
+	    return returnObject ? { dom2: false } : false;
+	  }
+
+	  var dom2Document = (0, _helpers.assertPropertyTypes)(doc, {
+	    importNode: 'function',
+	    createElementNS: 'function',
+	    createAttributeNS: 'function',
+	    getElementsByTagNameNS: 'function',
+	    getElementById: 'function'
+	  });
+
+	  var dom2DocumentImplementation = (0, _helpers.assertPropertyTypes)(doc.implementation, {
+	    createDocumentType: 'function',
+	    createDocument: 'function'
+	  });
+
+	  var dom2Node = (0, _helpers.assertPropertyTypes)(el, {
+	    namespaceURI: 'string',
+	    prefix: null, // not always a 'string'
+	    localName: 'string',
+
+	    isSupported: 'function',
+	    hasAttributes: 'function'
+	    // normalize() was moved from Element to Node in DOM2, but DOM1 tests it
+	  });
+
+	  var dom2Element = (0, _helpers.assertPropertyTypes)(el, {
+	    getAttributeNS: 'function',
+	    setAttributeNS: 'function',
+	    removeAttributeNS: 'function',
+	    getAttributeNodeNS: 'function',
+	    setAttributeNodeNS: 'function',
+	    getElementsByTagNameNS: 'function',
+	    hasAttribute: 'function',
+	    hasAttributeNS: 'function'
+	  });
+
+	  var report = {
+	    'dom2.document': dom2Document,
+	    'dom2.documentimplementation': dom2DocumentImplementation,
+	    'dom2.element': dom2Element,
+	    'dom2.node': dom2Node
+	  };
+
+	  (0, _helpers.addSummary)(report, 'dom2');
+
+	  return returnObject ? report : report.dom2;
 	};
 
 	module.exports = exports['default'];
