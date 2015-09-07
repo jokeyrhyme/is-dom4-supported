@@ -4,6 +4,8 @@
 
 var test = require('tape');
 
+require('babel-core/register');
+
 // our modules
 
 var isDOM4Supported = require('../');
