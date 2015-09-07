@@ -1,5 +1,12 @@
 'use strict';
 
+// local modules
+
+import { addSummary, assign } from './lib/helpers';
+import dom1 from './lib/dom1';
+
+// this module
+
 /**
  * http://www.w3.org/TR/dom/#interface-customevent
  * @param {Element} [el] a DOM Element to run tests against
@@ -43,9 +50,6 @@ var eventTargets = function (el) {
 var documents = function (el) {
   var doc = el.ownerDocument || global.document;
   return !!(
-    typeof doc.documentElement === 'object' &&
-    typeof doc.createDocumentFragment === 'function' &&
-    typeof doc.createProcessingInstruction === 'function' &&
     typeof doc.importNode === 'function' &&
     typeof doc.adoptNode === 'function' &&
     typeof doc.createEvent === 'function' &&
@@ -66,20 +70,11 @@ var nodes = function (el) {
   // we don't test ChildNode#remove(), because that's a ShadowDOM thing
   return !!(
     // ParentNode
-    typeof el.children === 'object' &&
     typeof el.childElementCount === 'number' &&
     typeof el.querySelector === 'function' &&
     typeof el.querySelectorAll === 'function' &&
     // Node
     global.Node &&
-    typeof global.Node.ELEMENT_NODE === 'number' &&
-    typeof global.Node.DOCUMENT_FRAGMENT_NODE === 'number' &&
-    typeof el.nodeType === 'number' &&
-    typeof el.hasChildNodes === 'function' &&
-    typeof el.insertBefore === 'function' &&
-    typeof el.appendChild === 'function' &&
-    typeof el.replaceChild === 'function' &&
-    typeof el.removeChild === 'function' &&
     typeof el.querySelector === 'function'
   );
 };
@@ -93,7 +88,6 @@ var elements = function (el) {
   return !!(
     global.HTMLElement &&
     typeof el.localName === 'string' &&
-    typeof el.tagName === 'string' &&
     typeof el.className === 'string' &&
     typeof el.classList === 'object' &&
     (
@@ -102,31 +96,33 @@ var elements = function (el) {
       typeof el.webkitMatchesSelector === 'function' ||
       typeof el.mozMatchesSelector === 'function' ||
       typeof el.msMatchesSelector === 'function' // IE (10, 11), Edge
-    ) &&
-    typeof el.getAttribute === 'function' &&
-    typeof el.hasAttribute === 'function' &&
-    typeof el.removeAttribute === 'function' &&
-    typeof el.setAttribute === 'function'
+    )
   );
 };
 
 /**
  * @param {Element} [el] a DOM Element to run tests against
- * @returns {Boolean} does this JavaScript environment conform to DOM 4?
+ * @param {Object} [options]
+ * @returns {boolean|Object} true|false unless returnObject is true
  */
-module.exports = function (el) {
+module.exports = function (el = null, { returnObject = false } = {}) {
   if (!el) {
     try {
       el = global.document.createElement('p');
     } catch (ignore) {
-      return false;
+      return returnObject ? { dom4: false } : false;
     }
   }
-  return !!(
-    customEvents(el) &&
-    eventTargets(el) &&
-    documents(el) &&
-    nodes(el) &&
-    elements(el)
-  );
+  let report = {
+    'dom4.customevent': customEvents(el),
+    'dom4.eventtarget': eventTargets(el),
+    'dom4.document': documents(el),
+    'dom4.node': nodes(el),
+    'dom4.element': elements(el)
+  };
+
+  assign(report, dom1(el, { returnObject }));
+  addSummary(report, 'dom4');
+
+  return returnObject ? report : report.dom4;
 };

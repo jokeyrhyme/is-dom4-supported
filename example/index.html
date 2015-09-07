@@ -2,15 +2,37 @@
 <html>
 <head>
   <meta charset="utf-8" />
+  <style>
+  code {
+    font-family: monospace;
+    white-space: pre-wrap;
+  }
+  </style>
 </head>
 <body>
+  <code id="code"></code>
   <script src="../dist/index.js"></script>
   <script>
-  if (window.isDOM4Supported()) {
-    document.documentElement.style.backgroundColor = '#00aa00';
-  } else {
-    document.documentElement.style.backgroundColor = '#aa0000';
-  }
+  (function () {
+    'use strict';
+
+    var code, report;
+
+    if (window.isDOM4Supported()) {
+      document.documentElement.style.backgroundColor = '#00aa00';
+    } else {
+      document.documentElement.style.backgroundColor = '#aa0000';
+    }
+
+    code = document.getElementById('code');
+    report = window.isDOM4Supported(code, { returnObject: true });
+
+    code.appendChild(
+      document.createTextNode(
+        JSON.stringify(report, null, 2)
+      )
+    );
+  }());
   </script>
 </body>
 </html>

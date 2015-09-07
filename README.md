@@ -51,11 +51,16 @@ console.log(isDOM4Supported()); // `true` or `false`
 
 ## API
 
-### `isDOM4Supported(el)`
+### `isDOM4Supported(el, options)`
 
 - @param {`Element`} [el] a DOM Element to run tests against
-- @returns {`Boolean`} does this JavaScript environment conform to DOM 4?
+- @param {`SupportedOptions`} [options]
+- @returns {`boolean`|`Object`} true|false unless returnObject is true
 
 This project creates a temporary unattached DOM Element if you do not provide
 one. If you are performing other tests against DOM Elements, you might consider
 reusing the same one, hence the optional parameter.
+
+#### @typedef {`Object`} SupportedOptions
+
+- @property {`boolean`} returnObject - if true, function returns a detailed Object
