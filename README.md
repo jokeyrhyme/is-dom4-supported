@@ -48,6 +48,16 @@ console.log(isDOM4Supported()); // `true` or `false`
 </script>
 ```
 
+WebComponents.js poly-fills `CustomEvent` and `MutationObserver`, so you'll
+probably want to ignore the results for these tests:
+
+```javascript
+var isDOM4Supported = require('is-dom4-supported');
+console.log(isDOM4Supported(null, {
+  ignore: ['dom4.customevent', 'dom4.mutationobserver']
+})); // `true` or `false`
+```
+
 
 ## API
 
@@ -57,10 +67,14 @@ console.log(isDOM4Supported()); // `true` or `false`
 - @param {`SupportedOptions`} [options]
 - @returns {`boolean`|`Object`} true|false unless returnObject is true
 
-This project creates a temporary unattached DOM Element if you do not provide
-one. If you are performing other tests against DOM Elements, you might consider
-reusing the same one, hence the optional parameter.
+This project creates a temporary unattached DOM Element if you do not provide one.
+If you are performing other tests against DOM Elements,
+you might consider reusing the same one, hence the optional parameter.
+
+The report `Object` contains the results of individual tests prefixed by their DOM level (e.g. "dom4.customevent"),
+as well as summary properties that are `true` if all preceding properties are `true` (e.g. "dom4").
 
 #### @typedef {`Object`} SupportedOptions
 
+- @property {`string[]`} ignore - array of tests to ignore for summaries
 - @property {`boolean`} returnObject - if true, function returns a detailed Object

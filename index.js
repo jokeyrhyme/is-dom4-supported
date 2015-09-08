@@ -15,7 +15,8 @@ import dom4 from './lib/dom4';
  * @param {Object} [options]
  * @returns {boolean|Object} true|false unless returnObject is true
  */
-module.exports = function (el = null, { returnObject = false } = {}) {
+module.exports = function (el = null, { ignore = [], returnObject = false } = {}) {
+  let doc;
   if (!el) {
     try {
       el = global.document.createElement('p');
@@ -23,14 +24,18 @@ module.exports = function (el = null, { returnObject = false } = {}) {
       return returnObject ? { dom4: false } : false;
     }
   }
+  doc = el.ownerDocument || global.document;
+  if (!doc) {
+    return returnObject ? { dom4: false } : false;
+  }
 
   let report = {};
   let levels = { dom1, dom2, dom3, dom4 };
 
   for (let prop in levels) {
     if (levels.hasOwnProperty(prop)) {
-      assign(report, levels[prop](el, { returnObject }));
-      addSummary(report, prop);
+      assign(report, levels[prop](el, doc));
+      addSummary(report, prop, { ignore });
     }
   }
 

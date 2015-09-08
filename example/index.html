@@ -22,6 +22,10 @@
     <h2>window.isDOM4Supported(el)</h2>
     <code id="code-provided"></code>
   </section>
+  <section>
+    <h2>window.isDOM4Supported(el, { ignore })</h2>
+    <code id="code-ignore"></code>
+  </section>
   <script src="../dist/index.js"></script>
   <script>
   (function () {
@@ -46,6 +50,18 @@
 
     code = document.getElementById('code-provided');
     report = window.isDOM4Supported(code, { returnObject: true });
+
+    code.appendChild(
+      document.createTextNode(
+        JSON.stringify(report, null, 2)
+      )
+    );
+
+    code = document.getElementById('code-ignore');
+    report = window.isDOM4Supported(code, {
+      ignore: ['dom4.customevent', 'dom4.mutationobserver'],
+      returnObject: true
+    });
 
     code.appendChild(
       document.createTextNode(
