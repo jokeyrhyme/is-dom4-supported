@@ -5,6 +5,7 @@
 import { addSummary, assign } from './lib/helpers';
 import dom1 from './lib/dom1';
 import dom2 from './lib/dom2';
+import dom3 from './lib/dom3';
 
 // this module
 
@@ -31,19 +32,6 @@ var customEvents = function (el) {
 };
 
 /**
- * http://www.w3.org/TR/dom/#interface-eventtarget
- * @param {Element} [el] a DOM Element to run tests against
- * @returns {Boolean} are EventTargets supported?
- */
-var eventTargets = function (el) {
-  return !!(
-    typeof el.addEventListener === 'function' &&
-    typeof el.removeEventListener === 'function' &&
-    typeof el.dispatchEvent === 'function'
-  );
-};
-
-/**
  * http://www.w3.org/TR/dom/#interface-document
  * @param {Element} [el] a DOM Element to run tests against
  * @returns {Boolean} are Documents supported?
@@ -51,8 +39,6 @@ var eventTargets = function (el) {
 var documents = function (el) {
   var doc = el.ownerDocument || global.document;
   return !!(
-    typeof doc.adoptNode === 'function' &&
-    typeof doc.createEvent === 'function' &&
     typeof doc.createRange === 'function' &&
     typeof doc.createNodeIterator === 'function' &&
     typeof doc.createTreeWalker === 'function'
@@ -114,7 +100,6 @@ module.exports = function (el = null, { returnObject = false } = {}) {
   }
   let report = {
     'dom4.customevent': customEvents(el),
-    'dom4.eventtarget': eventTargets(el),
     'dom4.document': documents(el),
     'dom4.node': nodes(el),
     'dom4.element': elements(el)
@@ -122,6 +107,7 @@ module.exports = function (el = null, { returnObject = false } = {}) {
 
   assign(report, dom1(el, { returnObject }));
   assign(report, dom2(el, { returnObject }));
+  assign(report, dom3(el, { returnObject }));
   addSummary(report, 'dom4');
 
   return returnObject ? report : report.dom4;
