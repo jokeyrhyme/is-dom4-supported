@@ -7,10 +7,21 @@
     font-family: monospace;
     white-space: pre-wrap;
   }
+  section {
+    display: inline-block;
+  }
   </style>
 </head>
 <body>
-  <code id="code"></code>
+  <h1>DOM features supported</h1>
+  <section>
+    <h2>window.isDOM4Supported()</h2>
+    <code id="code-auto"></code>
+  </section>
+  <section>
+    <h2>window.isDOM4Supported(el)</h2>
+    <code id="code-provided"></code>
+  </section>
   <script src="../dist/index.js"></script>
   <script>
   (function () {
@@ -24,7 +35,16 @@
       document.documentElement.style.backgroundColor = '#aa0000';
     }
 
-    code = document.getElementById('code');
+    code = document.getElementById('code-auto');
+    report = window.isDOM4Supported(null, { returnObject: true });
+
+    code.appendChild(
+      document.createTextNode(
+        JSON.stringify(report, null, 2)
+      )
+    );
+
+    code = document.getElementById('code-provided');
     report = window.isDOM4Supported(code, { returnObject: true });
 
     code.appendChild(
