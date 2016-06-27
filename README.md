@@ -1,8 +1,7 @@
-# is-dom4-supported.js
+# is-dom4-supported.js [![npm module](https://img.shields.io/npm/v/is-dom4-supported.svg)](https://www.npmjs.com/package/is-dom4-supported)
+ [![AppVeyor Status](https://ci.appveyor.com/api/projects/status/github/jokeyrhyme/is-dom4-supported?branch=master&svg=true)](https://ci.appveyor.com/project/jokeyrhyme/is-dom4-supported) [![Travis CI Status](https://travis-ci.org/jokeyrhyme/is-dom4-supported.svg?branch=master)](https://travis-ci.org/jokeyrhyme/is-dom4-supported)
 
 does this JavaScript environment conform to DOM 4?
-
-[![npm module](https://img.shields.io/npm/v/is-dom4-supported.svg)](https://www.npmjs.com/package/is-dom4-supported)
 
 
 ## What is this?
