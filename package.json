@@ -1,7 +1,7 @@
 {
   "name": "is-dom4-supported",
   "description": "does this JavaScript environment conform to DOM 4?",
-  "version": "2.0.0",
+  "version": "2.0.1",
   "author": "Ron Waldon (https://github.com/jokeyrhyme)",
   "bugs": {
     "url": "https://github.com/jokeyrhyme/is-dom4-supported/issues"

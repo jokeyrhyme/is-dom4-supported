@@ -1,6 +1,14 @@
 # Changelog
 
 
+## 2.0.1 - 2016-06-28
+
+
+### Fixed
+
+- include missing "lib" folder in npm package (#3)
+
+
 ## v2.0.0 - 2015-09-08
 
 
