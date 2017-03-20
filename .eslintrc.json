@@ -1,9 +1,13 @@
 {
   "extends": [
     "eslint:recommended",
+    "plugin:node/recommended",
     "standard"
   ],
   "env": {
     "node": true
-  }
+  },
+  "plugins": [
+    "node"
+  ]
 }
