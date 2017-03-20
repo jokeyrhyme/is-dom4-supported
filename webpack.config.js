@@ -1,8 +1,8 @@
-'use strict';
+'use strict'
 
 // foreign modules
 
-var webpack = require('webpack');
+var webpack = require('webpack')
 
 // this module
 
@@ -19,4 +19,4 @@ module.exports = {
   plugins: [
     new webpack.optimize.UglifyJsPlugin({minimize: true})
   ]
-};
+}

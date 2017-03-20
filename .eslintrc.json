@@ -1,7 +1,7 @@
 {
   "extends": [
     "eslint:recommended",
-    "semistandard"
+    "standard"
   ],
   "env": {
     "node": true
