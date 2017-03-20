@@ -1,9 +1,5 @@
 'use strict'
 
-// foreign modules
-
-var webpack = require('webpack')
-
 // this module
 
 module.exports = {
@@ -15,8 +11,5 @@ module.exports = {
   output: {
     library: 'isDOM4Supported',
     libraryTarget: 'umd'
-  },
-  plugins: [
-    new webpack.optimize.UglifyJsPlugin({minimize: true})
-  ]
+  }
 }

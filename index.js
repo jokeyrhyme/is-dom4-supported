@@ -2,11 +2,11 @@
 
 // local modules
 
-import { addSummary, assign } from './lib/helpers'
-import dom1 from './lib/dom1'
-import dom2 from './lib/dom2'
-import dom3 from './lib/dom3'
-import dom4 from './lib/dom4'
+const { addSummary, assign } = require('./lib/helpers.js')
+const dom1 = require('./lib/dom1.js')
+const dom2 = require('./lib/dom2.js')
+const dom3 = require('./lib/dom3.js')
+const dom4 = require('./lib/dom4.js')
 
 // this module
 
