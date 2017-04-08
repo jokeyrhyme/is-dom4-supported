@@ -10,13 +10,13 @@
   "devDependencies": {
     "babel-core": "^6.20.0",
     "babel-loader": "^6.2.10",
-    "eslint": "^3.18.0",
-    "eslint-config-standard": "^7.1.0",
-    "eslint-plugin-node": "^4.2.1",
+    "eslint": "^3.19.0",
+    "eslint-config-standard": "^10.0.0",
+    "eslint-plugin-import": "^2.2.0",
+    "eslint-plugin-node": "^4.2.2",
     "eslint-plugin-promise": "^3.5.0",
-    "eslint-plugin-standard": "^3.0.0",
+    "eslint-plugin-standard": "^3.0.1",
     "fixpack": "^2.3.1",
-    "flow-bin": "^0.43.0",
     "istanbul": "^0.4.4",
     "tape": "^4.2",
     "webpack": "^2.2.1"
@@ -50,7 +50,6 @@
     "build": "webpack ./index.js ./dist/index.js",
     "eslint": "eslint --fix --cache .",
     "fixpack": "fixpack",
-    "flow_check": "flow check",
     "pretest": "npm run eslint && npm run fixpack && npm run build",
     "test": "istanbul cover ./tests/"
   }
